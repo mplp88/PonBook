@@ -2,16 +2,17 @@
 
 ## Project setup
 ```
-npm install
+1) npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run nodemon
-npm run serve
+1) npm run nodemon
+2) npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+1) npm run build
+2) npm start
 ```
