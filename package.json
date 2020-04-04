@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "nodemon": "./node_modules/.bin/nodemon ./server/server.js",
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "nodemon": "./node_modules/.bin/nodemon ./server/server.js",
+    "lint": "vue-cli-service lint",
+    "serve": "vue-cli-service serve",
+    "server": "node ./server/server.js",
+    "start": "node webserver.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

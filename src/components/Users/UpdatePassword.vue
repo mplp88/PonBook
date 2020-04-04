@@ -66,7 +66,7 @@ export default {
       let vm = this;
       if (vm.validate()) {
         fetch(
-          `http://localhost:8082/changePassword/${vm.$store.getters.user.username}`,
+          `http://localhost:8081/changePassword/${vm.$store.getters.user.username}`,
           {
             method: "POST",
             body: JSON.stringify({

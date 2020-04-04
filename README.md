@@ -22,5 +22,7 @@ PonBook: A Social Network project to learn how to use MongoDB with Node.js and V
 ### Compiles and minifies for production
 ```
 1) npm run build
-2) npm start
+2) npm run server
+3) npm start
+4) navegar to http://localhost:8080 (Asegurarse de no tener nada corriendo en el puerto 8080)
 ```

@@ -1,4 +1,6 @@
-require('dotenv').config()
+require('dotenv').config({
+  path: './.env.local'
+})
 const MongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser');
 const cors = require('cors')
@@ -7,7 +9,8 @@ const app = express()
 
 const user = process.env.DB_USER
 const password = process.env.DB_PASS
-const port = process.env.PORT
+const port = process.env.SERVER_PORT
+//let port = process.env.PORT || 8080;
 
 let db;
 
