@@ -13,6 +13,10 @@ PonBook: A Social Network project to learn how to use MongoDB with Node.js and V
 1) npm install
 ```
 
+## MongoDB Data Base
+```
+Modificar credenciales en archivo .env
+```
 ### Compiles and hot-reloads for development
 ```
 1) npm run nodemon
