@@ -28,5 +28,5 @@ Modificar credenciales en archivo .env
 1) npm run build
 2) npm run server
 3) npm start
-4) navegar to http://localhost:8080 (Asegurarse de no tener nada corriendo en el puerto 8080)
+4) navegar to http://localhost:8080 (Asegurarse de no tener nada corriendo en los puertos 8080 y 8081)
 ```
