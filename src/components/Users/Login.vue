@@ -3,10 +3,10 @@
     <h2>Ingresar a la pagina</h2>
     <form @submit.prevent="login">
       <div class="form-group">
-        <input class="form-control" v-model="user.username" type="text" placeholder="Usuario" />
+        <input class="form-control" id="username" name="username" v-model="user.username" type="text" placeholder="Usuario" />
       </div>
       <div class="form-group">
-        <input class="form-control" v-model="user.password" type="password" placeholder="Password" />
+        <input class="form-control" id="password" name="password" v-model="user.password" type="password" placeholder="Password" />
       </div>
       <div class="form-group">
         <input class="btn btn-primary" type="submit" value="Ingresar" />
@@ -72,6 +72,9 @@ export default {
         }
       })
     }
+  },
+  mounted: function() {
+    document.getElementById('username').focus();
   }
 };
 </script>

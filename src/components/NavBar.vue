@@ -38,7 +38,4 @@ export default {
 </script>
 
 <style>
-  .router-link-exact-active{
-    color: rgb(255, 0, 0);
-  }
 </style>

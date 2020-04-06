@@ -4,6 +4,8 @@
     <form @submit.prevent="register" novalidate>
       <div class="form-group">
         <input
+          id="firstName"
+          name="firstName"
           class="form-control"
           v-model="newUser.firstName"
           type="text"
@@ -15,6 +17,8 @@
       </div>
       <div class="form-group">
         <input
+          id="lasName"
+          name="lasName"
           class="form-control"
           v-model="newUser.lastName"
           type="text"
@@ -26,6 +30,8 @@
       </div>
       <div class="form-group">
         <input
+          id="age"
+          name="age"
           class="form-control"
           v-model="newUser.age"
           type="number"
@@ -37,6 +43,8 @@
       </div>
       <div class="form-group">
         <input
+          id="username"
+          name="username"
           class="form-control"
           v-model="newUser.username"
           type="text"
@@ -50,6 +58,8 @@
       </div>
       <div class="form-group">
         <input
+          id="password"
+          name="password"
           class="form-control"
           v-model="newUser.password"
           type="password"
@@ -63,6 +73,8 @@
       </div>
       <div class="form-group">
         <input
+          id="repeatPassword"
+          name="repeatPassword"
           class="form-control"
           v-model="repeatPassword"
           type="password"
@@ -73,7 +85,7 @@
         <div class="invalid-feedback">Los passwords no coinciden.</div>
       </div>
       <div class="form-group">
-        <input class="btn btn-primary" type="submit" value="Ingresar" />
+        <input class="btn btn-primary" type="submit" value="Enviar" />
       </div>
     </form>
   </div>
@@ -190,6 +202,9 @@ export default {
         this.repeatPassword == this.newUser.password
       );
     }
+  },
+  mounted: function() {
+    document.getElementById('firstName').focus();
   }
 };
 </script>
