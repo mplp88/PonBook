@@ -67,7 +67,7 @@
     <hr />
     <div class="row mb-3">
       <div class="col-2">
-        <router-link to="/updatePassword" v-if="!editMode">Cambiar password</router-link>
+        <router-link to="/changePassword" v-if="!editMode">Cambiar password</router-link>
       </div>
     </div>
   </div>

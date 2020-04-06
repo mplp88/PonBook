@@ -5,7 +5,7 @@ import Login from './components/Users/Login'
 import Logout from './components/Users/Logout'
 import Register from './components/Users/Register'
 import MyAccount from './components/Users/MyAccount'
-import UpdatePassword from './components/Users/UpdatePassword'
+import ChangePassword from './components/Users/ChangePassword'
 
 const routes = [{
     name: 'Index',
@@ -39,9 +39,9 @@ const routes = [{
     }
   },
   {
-    name: 'UpdatePassword',
-    path: '/updatePassword',
-    component: UpdatePassword,
+    name: 'ChangePassword',
+    path: '/changePassword',
+    component: ChangePassword,
     meta: { 
       requiresAuth: true
     }
