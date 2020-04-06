@@ -27,11 +27,15 @@
 </template>
 
 <script>
-//TODO: arreglar el estilo del active y el sr-only current
+
 export default {
   computed: {
     isLoggedIn: function() {
       return this.$store.getters.isLoggedIn;
+    },
+    isActive: function() {
+      //TODO: arreglar el estilo del active y el sr-only current
+      return false;
     }
   }
 }
