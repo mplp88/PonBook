@@ -1,6 +1,4 @@
-require('dotenv').config({
-  path: './.env.local'
-})
+require('dotenv').config()
 const MongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser');
 const cors = require('cors')
@@ -10,9 +8,9 @@ const app = express()
 const user = process.env.DB_USER
 const password = process.env.DB_PASS
 const port = process.env.SERVER_PORT
-//let port = process.env.PORT || 8080;
 
 let db;
+let dbError;
 
 app.use(cors())
 app.use(bodyParser.urlencoded({
@@ -21,7 +19,9 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-  res.send('<h1>API is Online!</h1>')
+  if(dbError) return res.send('<h1>Error connecting to MongoDB. Check server log</h1>')
+
+  return res.send('<h1>API is Online!</h1>')
 })
 
 app.post('/login', (req, res) => {
@@ -162,9 +162,12 @@ app.post('/register', (req, res) => {
 })
 
 MongoClient.connect(`mongodb+srv://${user}:${password}@cluster0-dcpop.mongodb.net/test?retryWrites=true&w=majority`, (err, client) => {
-  if (err) console.log(err)
-
-  db = client.db('test');
+  if (err) {
+    console.log(err)
+    dbError = true;
+  } else {
+    db = client.db('test');
+  }
 
   app.listen(port, () => {
     //console.log(db);
