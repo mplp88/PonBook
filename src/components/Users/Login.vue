@@ -38,7 +38,7 @@ export default {
           title: "Ingresando!",
           onBeforeOpen: () => {
               swal.showLoading();
-              fetch('http://localhost:8081/login', {
+              fetch('http://localhost:8081/api/account/login', {
                 method: 'POST',
                 body: JSON.stringify(vm.user),
                 headers: {

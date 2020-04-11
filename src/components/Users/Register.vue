@@ -119,7 +119,7 @@ export default {
           title: "Registrando!",
           onBeforeOpen: () => {
             swal.showLoading();
-            fetch("http://localhost:8081/register", {
+            fetch("http://localhost:8081/api/account/register", {
               method: "POST",
               body: JSON.stringify(vm.newUser),
               headers: {

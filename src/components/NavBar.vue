@@ -15,7 +15,7 @@
       <li class="nav-item dropdown">
         <a href="#" class="nav-link dropdown-toggle" id="navbar-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cuenta</a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown">
-          <router-link v-if="!isLoggedIn" class="dropdown-item" v-bind:activeClass="active" to="/login">Login <span v-if="isActive" class="sr-only">(current)</span></router-link>
+          <router-link v-if="!isLoggedIn" class="dropdown-item" :class="{ active: isActive}" to="/login">Login <span v-if="isActive" class="sr-only">(current)</span></router-link>
           <router-link v-if="!isLoggedIn" class="dropdown-item" :class="{ active: isActive}" to="/register">Registrarse <span v-if="isActive" class="sr-only">(current)</span></router-link>
           <router-link v-if="isLoggedIn" class="dropdown-item" :class="{ active: isActive}" to="/myAccount">Mi Cuenta <span v-if="isActive" class="sr-only">(current)</span></router-link>
           <router-link v-if="isLoggedIn" class="dropdown-item" :class="{ active: isActive}" to="/logout">Salir <span v-if="isActive" class="sr-only">(current)</span></router-link>
