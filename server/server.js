@@ -6,6 +6,7 @@ const app = express()
 const dal = require('./dal/mongodb')
 
 const Account = require('./account/account')
+const Users = require('./users/users')
 
 const port = process.env.SERVER_PORT
 
@@ -22,6 +23,7 @@ app.get('/api', (req, res) => {
 })
 
 app.use('/api/account', Account)
+app.use('/api/users', Users)
 
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}/api`)

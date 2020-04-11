@@ -5,7 +5,7 @@ const dal = require('../dal/mongodb')
 router.use(cors())
 
 router.post('/login', (req, res) => {
-  if(dal.hasDbError) res.send('Error in DB.\n'+dal.error);
+  if (dal.hasDbError) res.send('Error in DB.\n' + dal.error);
 
   let user
   let username = req.body.username
@@ -15,8 +15,14 @@ router.post('/login', (req, res) => {
   dal.db.collection('users').find({
     "username": regex
   }).toArray((err, results) => {
-    if (err) return res.json(err)
+    if (err) {
+      console.log(err);
 
+      return res.json({
+        ok: false,
+        error: err
+      })
+    }
     let temp = results.find(u => u.username == username && u.password == password)
     user = temp ? temp : {}
     return res.json(user)
@@ -24,7 +30,7 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/updateAccountInfo/:username', (req, res) => {
-  if(dal.hasDbError) res.send('Error in DB.\n'+dal.error);
+  if (dal.hasDbError) res.send('Error in DB.\n' + dal.error);
 
   console.log(`called updateAccountInfo with username ${req.params.username}`)
   console.log('body', req.body)
@@ -69,7 +75,7 @@ router.post('/updateAccountInfo/:username', (req, res) => {
 })
 
 router.post('/changePassword/:username', (req, res) => {
-  if(dal.hasDbError) res.send('Error in DB.\n'+dal.error);
+  if (dal.hasDbError) res.send('Error in DB.\n' + dal.error);
 
   console.log(`called changePassword with username ${req.params.username}`)
   console.log('body', req.body)
@@ -124,7 +130,7 @@ router.post('/changePassword/:username', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-  if(dal.hasDbError) res.send('Error in DB.\n'+dal.error);
+  if (dal.hasDbError) res.send('Error in DB.\n' + dal.error);
 
   try {
     if (!(req.body.username && req.body.password))
