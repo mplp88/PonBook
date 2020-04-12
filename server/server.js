@@ -9,6 +9,7 @@ const Account = require('./account/account')
 const Users = require('./users/users')
 
 const port = process.env.SERVER_PORT
+let hrstart = process.hrtime();
 
 app.use(cors())
 app.use(bodyParser.urlencoded({
@@ -17,7 +18,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 app.get('/api', (req, res) => {
-  if(dal.hasDbError) return res.send('<h1>Error connecting to MongoDB. Check server log</h1>')
+  if (dal.hasDbError) return res.send('<h1>Error connecting to MongoDB. Check server log</h1>')
 
   return res.send('<h1>API is Online!</h1>')
 })
@@ -26,5 +27,8 @@ app.use('/api/account', Account)
 app.use('/api/users', Users)
 
 app.listen(port, () => {
+  console.clear();
+  let ms = Math.round(process.hrtime(hrstart)[1] / 1000000);
+  console.log(`Executed in ${ms}ms`)
   console.log(`Listening on http://localhost:${port}/api`)
 })
