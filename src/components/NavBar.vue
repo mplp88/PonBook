@@ -10,6 +10,9 @@
       <li class="nav-item">
         <router-link class="nav-link" :class="{ active: isActive}" to="/">Home <span v-if="isActive" class="sr-only">(current)</span></router-link>
       </li>
+      <li v-if="isLoggedIn" class="nav-item">
+        <router-link class="nav-link" :class="{ active: isActive}" to="/friends">Amigos <span v-if="isActive" class="sr-only">(current)</span></router-link>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
