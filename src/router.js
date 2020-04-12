@@ -6,35 +6,47 @@ import Logout from './components/Users/Logout'
 import Register from './components/Users/Register'
 import MyAccount from './components/Users/MyAccount'
 import ChangePassword from './components/Users/ChangePassword'
+import Friends from './components/Friends/Friends'
 
 const routes = [{
     name: 'Index',
     path: '/',
-    component: Index
+    component: Index,
+    meta: {
+      title: 'Home'
+    }
   },
   {
     name: 'Login',
     path: '/login',
-    component: Login
+    component: Login,
+    meta: {
+      title: 'Ingresar'
+    }
   },
   {
     name: 'Logout',
     path: '/logout',
     component: Logout,
     meta: {
+      title: 'Salir',
       requiresAuth: true
     }
   },
   {
     name: 'Register',
     path: '/register',
-    component: Register
-  },
+    component: Register,
+    meta: {
+      title: 'Registrar'
+    }
+    },
   {
     name: 'MyAccount',
     path: '/myAccount',
     component: MyAccount,
-    meta: { 
+    meta: {
+      title: 'Mi Cuenta',
       requiresAuth: true
     }
   },
@@ -42,7 +54,17 @@ const routes = [{
     name: 'ChangePassword',
     path: '/changePassword',
     component: ChangePassword,
-    meta: { 
+    meta: {
+      title: 'Cambiar Password',
+      requiresAuth: true
+    }
+  },
+  {
+    name: 'Friends',
+    path: '/friends',
+    component: Friends,
+    meta: {
+      title: 'Amigos',
       requiresAuth: true
     }
   }
@@ -59,6 +81,7 @@ router.beforeEach((to, from, next) => {
       next({ name: 'Login' })
     }
   }
+  document.title = to.meta.title
   next();
 })
 
