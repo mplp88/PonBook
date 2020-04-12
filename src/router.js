@@ -7,6 +7,7 @@ import Register from './components/Users/Register'
 import MyAccount from './components/Users/MyAccount'
 import ChangePassword from './components/Users/ChangePassword'
 import Friends from './components/Friends/Friends'
+import FindFriends from './components/Friends/FindFriends'
 
 const routes = [{
     name: 'Index',
@@ -40,7 +41,7 @@ const routes = [{
     meta: {
       title: 'Registrar'
     }
-    },
+  },
   {
     name: 'MyAccount',
     path: '/myAccount',
@@ -67,6 +68,15 @@ const routes = [{
       title: 'Amigos',
       requiresAuth: true
     }
+  },
+  {
+    name: 'FindFriends',
+    path: '/findFriends',
+    component: FindFriends,
+    meta: {
+      title: 'Buscar Amigos',
+      requiresAuth: true
+    }
   }
 ]
 
@@ -78,7 +88,9 @@ let router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.isLoggedIn) {
-      next({ name: 'Login' })
+      next({
+        name: 'Login'
+      })
     }
   }
   document.title = to.meta.title

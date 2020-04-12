@@ -10,10 +10,10 @@ let store = new Vuex.Store({
 
   mutations: {
     setUser(state, user) {
-        state.user = user;
+      state.user = user;
     },
     logout(state) {
-        state.user = {};
+      state.user = {};
     }
   },
 
@@ -22,19 +22,22 @@ let store = new Vuex.Store({
       context.commit('setUser', user);
     },
     login(context, user) {
-        context.dispatch('setUser', user);
+      context.dispatch('setUser', user);
     },
     logout(context) {
-        context.commit('logout');
+      context.commit('logout');
     }
   },
 
   getters: {
     isLoggedIn(state) {
-        return state.user._id
+      return state.user._id
     },
     user(state) {
-        return state.user
+      return state.user
+    },
+    friend(state) {
+      return state.user.friends
     }
   }
 })

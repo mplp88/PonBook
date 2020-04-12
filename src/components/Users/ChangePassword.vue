@@ -66,7 +66,7 @@ export default {
       let vm = this;
       if (vm.validate()) {
         fetch(
-          `http://localhost:8081/api/account/changePassword/${vm.$store.getters.user.username}`,
+          `http://localhost:8081/api/account/changePassword/${vm.$store.getters.user._id}`,
           {
             method: "POST",
             body: JSON.stringify({
@@ -125,7 +125,8 @@ export default {
   computed: {
     oldPasswordValid: function() {
       return (
-        this.oldPassword != "" && this.oldPassword == this.$store.getters.user.password
+        this.oldPassword != "" &&
+        this.oldPassword == this.$store.getters.user.password
       );
     },
     newPasswordValid: function() {

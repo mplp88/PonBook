@@ -29,11 +29,9 @@ router.post('/login', (req, res) => {
   })
 })
 
-router.post('/updateAccountInfo/:username', (req, res) => {
+router.post('/updateAccountInfo/:id', (req, res) => {
   if (dal.hasDbError) res.send('Error in DB.\n' + dal.error);
 
-  console.log(`called updateAccountInfo with username ${req.params.username}`)
-  console.log('body', req.body)
   try {
     let newSet = {
       firstName: req.body.firstName,
@@ -43,10 +41,10 @@ router.post('/updateAccountInfo/:username', (req, res) => {
     let newValues = {
       $set: newSet
     }
-    let regex = new RegExp(req.params.username)
+    let regex = new RegExp(req.params.id)
 
     dal.db.collection('users').findOneAndUpdate({
-      'username': regex
+      '_id': regex
     }, newValues, {
       returnOriginal: false
     }, (err, result) => {
@@ -59,7 +57,6 @@ router.post('/updateAccountInfo/:username', (req, res) => {
         })
       }
 
-      console.log('actualizado!');
       return res.json({
         ok: true,
         result: result.value
@@ -74,19 +71,17 @@ router.post('/updateAccountInfo/:username', (req, res) => {
   }
 })
 
-router.post('/changePassword/:username', (req, res) => {
+router.post('/changePassword/:id', (req, res) => {
   if (dal.hasDbError) res.send('Error in DB.\n' + dal.error);
 
-  console.log(`called changePassword with username ${req.params.username}`)
-  console.log('body', req.body)
   try {
-    let regex = new RegExp(req.params.username)
+    let regex = new RegExp(req.params.id)
     let username = req.params.username;
     let oldPassword = req.body.oldPassword;
     let newPassword = req.body.newPassword;
 
     dal.db.collection('users').find({
-      "username": regex
+      "_id": regex
     }).toArray((err, results) => {
       if (err) return res.json(err)
 
@@ -101,7 +96,7 @@ router.post('/changePassword/:username', (req, res) => {
       }
 
       dal.db.collection('users').findOneAndUpdate({
-        'username': regex,
+        '_id': regex,
       }, {
         $set: {
           password: newPassword

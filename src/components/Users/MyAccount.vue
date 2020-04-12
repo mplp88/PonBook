@@ -117,7 +117,7 @@ export default {
           onBeforeOpen: () => {
             swal.showLoading();
             fetch(
-              `http://localhost:8081/api/account/updateAccountInfo/${vm.user.username}`,
+              `http://localhost:8081/api/account/updateAccountInfo/${vm.user._id}`,
               {
                 method: "POST",
                 body: JSON.stringify(vm.editUser),

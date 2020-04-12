@@ -32,13 +32,13 @@ router.get('/', (req, res) => {
   })
 })
 
-router.get('/:username', (req, res) => {
+router.get('/:id', (req, res) => {
   if (dal.hasDbError) return res.send('<h1>Error connecting to MongoDB. Check server log</h1>')
 
   let regex = new RegExp(req.params.username)
 
   dal.db.collection('users').find({
-    'username': regex
+    '_id': regex
   }).toArray((err, results) => {
     if (err) {
       console.log(err);
@@ -60,5 +60,104 @@ router.get('/:username', (req, res) => {
   })
 })
 
+router.get('/find/:username', (req, res) => {
+  try {
+    let regex = new RegExp(req.params.username)
+
+    dal.db.collection('users').find({
+      'username': regex
+    }).toArray((err, results) => {
+      if (err) {
+        console.log(err)
+
+        return res.json({
+          ok: false,
+          error: err
+        })
+      }
+
+      let users = [];
+
+      results.forEach(e => {
+        let {
+          _id,
+          username,
+          firstName,
+          lastName
+        } = e
+
+        users.push({
+          _id,
+          username,
+          firstName,
+          lastName
+        })
+      })
+
+      return res.json({
+        ok: true,
+        results: users
+      })
+    })
+  } catch (e) {
+    console.log(e)
+
+    return res.json({
+      ok: false,
+      error: e
+    })
+  }
+})
+
+router.post('/:id/addFriend', (req, res) => {
+  let friendId = req.body.friendId
+  let regex = new RegExp(req.params.id)
+
+  dal.db.collection('users').find({
+    '_id': regex
+  }).toArray((err, result) => {
+    if (err) {
+      console.log(err)
+
+      return res.json({
+        ok: false,
+        error: err
+      })
+    }
+
+    let user = result[0]
+
+    if (!user.friends) {
+      user.friends = []
+    }
+
+    user.friends.push({
+      id: friendId,
+      accepted: false
+    })
+
+    dal.db.collection('users').findOneAndUpdate({
+      '_id': regex
+    }, {
+      $set: user
+    }, {
+      returnOriginal: false
+    }, (err, result) => {
+      if (err) {
+        console.log(err)
+
+        return res.json({
+          ok: false,
+          error: err
+        })
+      }
+
+      return res.json({
+        ok: true,
+        user: result.value
+      })
+    })
+  })
+})
 
 module.exports = router
