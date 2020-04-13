@@ -3,9 +3,9 @@
     <h1>Bucar amigos</h1>
     <input class="form-control" v-model="query" placeholder="Escriba aquí para buscar amigos" />
     <p v-if="loading">Buscando...</p>
-    <ul>
-      <li v-for="result in results" :key="result._id">{{ result.username }}</li>
-    </ul>
+    <div>
+      <div v-for="result in results" :key="result._id">{{ result.username }}</div>
+    </div>
   </div>
 </template>
 
