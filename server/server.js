@@ -7,7 +7,7 @@ const dal = require('./dal/mongodb')
 
 const Account = require('./account/account')
 
-const port = process.env.SERVER_PORT
+// const port = process.env.SERVER_PORT
 
 app.use(cors())
 app.use(bodyParser.urlencoded({
