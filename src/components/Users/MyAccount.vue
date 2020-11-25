@@ -17,7 +17,10 @@
         <input
           v-else
           class="form-control col d-inline"
-          :class="{ 'is-valid': wasValidated && firstNameValid, 'is-invalid': wasValidated && !firstNameValid }"
+          :class="{
+            'is-valid': wasValidated && firstNameValid,
+            'is-invalid': wasValidated && !firstNameValid,
+          }"
           v-model="editUser.firstName"
           type="text"
           placeholder="Nombre"
@@ -31,7 +34,10 @@
         <input
           v-else
           class="form-control col d-inline"
-          :class="{ 'is-valid': wasValidated && lastNameValid, 'is-invalid': wasValidated && !lastNameValid }"
+          :class="{
+            'is-valid': wasValidated && lastNameValid,
+            'is-invalid': wasValidated && !lastNameValid,
+          }"
           v-model="editUser.lastName"
           type="text"
           placeholder="Apellido"
@@ -45,16 +51,26 @@
         <input
           v-else
           class="form-control col d-inline"
-          :class="{ 'is-valid': wasValidated && ageValid, 'is-invalid': wasValidated && !ageValid }"
+          :class="{
+            'is-valid': wasValidated && ageValid,
+            'is-invalid': wasValidated && !ageValid,
+          }"
           v-model="editUser.age"
           type="number"
           placeholder="Edad"
         />
         <div class="valid-feedback">Bien.</div>
-        <div class="invalid-feedback">La edad es obligatoria y debe ser 13 años o mayor.</div>
+        <div class="invalid-feedback">
+          La edad es obligatoria y debe ser 13 años o mayor.
+        </div>
       </div>
       <div class="row mb-3">
-        <input v-if="editMode" class="btn btn-primary offset-3 col-2" type="submit" value="Enviar" />
+        <input
+          v-if="editMode"
+          class="btn btn-primary offset-3 col-2"
+          type="submit"
+          value="Enviar"
+        />
         <input
           v-if="editMode"
           class="btn btn-danger offset-2 col-2"
@@ -67,7 +83,9 @@
     <hr />
     <div class="row mb-3">
       <div class="col-2">
-        <router-link to="/changePassword" v-if="!editMode">Cambiar password</router-link>
+        <router-link to="/changePassword" v-if="!editMode"
+          >Cambiar password</router-link
+        >
       </div>
     </div>
   </div>
@@ -77,19 +95,19 @@
 import swal from "sweetalert2";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       editUser: {
         firstName: "",
         lastName: "",
-        age: ""
+        age: "",
       },
       editMode: false,
-      wasValidated: false
+      wasValidated: false,
     };
   },
   methods: {
-    toggleEditMode: function() {
+    toggleEditMode: function () {
       let vm = this;
       vm.wasValidated = false;
       vm.editMode = !vm.editMode;
@@ -98,7 +116,7 @@ export default {
         vm.editUser = {
           firstName: "",
           lastName: "",
-          age: ""
+          age: "",
         };
       } else {
         vm.editUser.firstName = vm.user.firstName;
@@ -106,7 +124,7 @@ export default {
         vm.editUser.age = vm.user.age;
       }
     },
-    edit: function() {
+    edit: function () {
       let vm = this;
 
       if (vm.validateInfo()) {
@@ -116,25 +134,22 @@ export default {
           title: "Modificando!",
           onBeforeOpen: () => {
             swal.showLoading();
-            fetch(
-              `http://localhost:8081/api/account/updateAccountInfo/${vm.user.username}`,
-              {
-                method: "POST",
-                body: JSON.stringify(vm.editUser),
-                headers: {
-                  "Content-Type": "application/json"
-                }
-              }
-            )
-              .then(res => res.json())
-              .then(json => {
+            fetch(`/api/account/updateAccountInfo/${vm.user.username}`, {
+              method: "POST",
+              body: JSON.stringify(vm.editUser),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((res) => res.json())
+              .then((json) => {
                 if (json.ok) {
                   swal
                     .fire({
                       icon: "success",
                       title: `Hecho!`,
                       timer: 2000,
-                      timerProgressBar: true
+                      timerProgressBar: true,
                     })
                     .then(() => {
                       console.log(json.result);
@@ -150,15 +165,15 @@ export default {
                   console.error(json.error);
                 }
               })
-              .catch(err => {
+              .catch((err) => {
                 swal.fire("Error", "Error", "error");
                 console.error(err);
               });
-          }
+          },
         });
       }
     },
-    validateInfo: function() {
+    validateInfo: function () {
       let vm = this;
       let valid = true;
       vm.wasValidated = true;
@@ -168,22 +183,22 @@ export default {
       valid = valid && vm.ageValid;
 
       return valid;
-    }
+    },
   },
   computed: {
-    user: function() {
+    user: function () {
       return this.$store.getters.user;
     },
-    firstNameValid: function() {
+    firstNameValid: function () {
       return this.editUser.firstName != "";
     },
-    lastNameValid: function() {
+    lastNameValid: function () {
       return this.editUser.lastName != "";
     },
-    ageValid: function() {
+    ageValid: function () {
       return this.editUser.age != "" && this.editUser.age > 12;
-    }
-  }
+    },
+  },
 };
 </script>
 

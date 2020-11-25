@@ -8,7 +8,10 @@
           v-model="oldPassword"
           type="password"
           placeholder="Password anterior"
-          :class="{ 'is-valid': wasValidated && oldPasswordValid, 'is-invalid': wasValidated && !oldPasswordValid }"
+          :class="{
+            'is-valid': wasValidated && oldPasswordValid,
+            'is-invalid': wasValidated && !oldPasswordValid,
+          }"
         />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">El password es obligatorio</div>
@@ -19,12 +22,17 @@
           v-model="newPassword"
           type="password"
           placeholder="Password nuevo"
-          :class="{ 'is-valid': wasValidated && newPasswordValid, 'is-invalid': wasValidated && !newPasswordValid }"
+          :class="{
+            'is-valid': wasValidated && newPasswordValid,
+            'is-invalid': wasValidated && !newPasswordValid,
+          }"
         />
         <div class="valid-feedback">Bien.</div>
-        <div
-          class="invalid-feedback"
-        >El password es obligatorio, debe contener al menos una letra minuscula, una letra mayuscula, un número y un caracter especial (!, @, #, $, %, ^, & o *) y ser distinto al anterior.</div>
+        <div class="invalid-feedback">
+          El password es obligatorio, debe contener al menos una letra
+          minuscula, una letra mayuscula, un número y un caracter especial (!,
+          @, #, $, %, ^, & o *) y ser distinto al anterior.
+        </div>
       </div>
       <div class="form-group">
         <input
@@ -32,17 +40,29 @@
           v-model="repeatPassword"
           type="password"
           placeholder="Repetir Password"
-          :class="{ 'is-valid': wasValidated && repeatPasswordValid, 'is-invalid': wasValidated && !repeatPasswordValid }"
+          :class="{
+            'is-valid': wasValidated && repeatPasswordValid,
+            'is-invalid': wasValidated && !repeatPasswordValid,
+          }"
         />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">Los passwords no coinciden.</div>
       </div>
       <div class="row mb-3">
         <div class="col-2 offset-3">
-          <input class="btn btn-primary" type="submit" value="Cambiar Password" />
+          <input
+            class="btn btn-primary"
+            type="submit"
+            value="Cambiar Password"
+          />
         </div>
         <div class="col-2 offset-2">
-          <input class="btn btn-danger" type="buton" value="Cancelar" @click="cancel" />
+          <input
+            class="btn btn-danger"
+            type="buton"
+            value="Cancelar"
+            @click="cancel"
+          />
         </div>
       </div>
     </form>
@@ -53,33 +73,33 @@
 import swal from "sweetalert2";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       oldPassword: "",
       newPassword: "",
       repeatPassword: "",
-      wasValidated: false
+      wasValidated: false,
     };
   },
   methods: {
-    changePassword: function() {
+    changePassword: function () {
       let vm = this;
       if (vm.validate()) {
         fetch(
-          `http://localhost:8081/api/account/changePassword/${vm.$store.getters.user.username}`,
+          `/api/account/changePassword/${vm.$store.getters.user.username}`,
           {
             method: "POST",
             body: JSON.stringify({
               oldPassword: vm.oldPassword,
-              newPassword: vm.newPassword
+              newPassword: vm.newPassword,
             }),
             headers: {
-              "Content-Type": "application/json"
-            }
+              "Content-Type": "application/json",
+            },
           }
         )
-          .then(res => res.json())
-          .then(json => {
+          .then((res) => res.json())
+          .then((json) => {
             if (json.ok) {
               vm.$store.dispatch("setUser", json.result);
               console.log(json.result);
@@ -90,7 +110,7 @@ export default {
                   text: "El password se cambió con éxito",
                   icon: "success",
                   timer: 2000,
-                  timerProgressBar: true
+                  timerProgressBar: true,
                 })
                 .then(() => vm.$router.push("/myAccount"));
             } else {
@@ -102,15 +122,15 @@ export default {
               console.error(json.error);
             }
           })
-          .catch(err => {
+          .catch((err) => {
             swal.fire("Error", "Error", "error"), console.error(err);
           });
       }
     },
-    cancel: function() {
+    cancel: function () {
       this.$router.go(-1);
     },
-    validate: function() {
+    validate: function () {
       let vm = this;
       let valid = true;
 
@@ -120,27 +140,28 @@ export default {
       valid = valid && vm.repeatPasswordValid;
 
       return valid;
-    }
+    },
   },
   computed: {
-    oldPasswordValid: function() {
+    oldPasswordValid: function () {
       return (
-        this.oldPassword != "" && this.oldPassword == this.$store.getters.user.password
+        this.oldPassword != "" &&
+        this.oldPassword == this.$store.getters.user.password
       );
     },
-    newPasswordValid: function() {
+    newPasswordValid: function () {
       return (
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(
           this.newPassword
         ) && this.newPassword != this.$store.getters.user.password
       );
     },
-    repeatPasswordValid: function() {
+    repeatPasswordValid: function () {
       return (
         this.repeatPassword != "" && this.repeatPassword == this.newPassword
       );
-    }
-  }
+    },
+  },
 };
 </script>
 

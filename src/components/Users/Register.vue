@@ -10,7 +10,10 @@
           v-model="newUser.firstName"
           type="text"
           placeholder="Nombre"
-          :class="{ 'is-valid': wasValidated && firstNameValid, 'is-invalid': wasValidated &&  !firstNameValid }"
+          :class="{
+            'is-valid': wasValidated && firstNameValid,
+            'is-invalid': wasValidated && !firstNameValid,
+          }"
         />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">El nombre es obligatorio.</div>
@@ -23,7 +26,10 @@
           v-model="newUser.lastName"
           type="text"
           placeholder="Apellido"
-          :class="{ 'is-valid': wasValidated && lastNameValid, 'is-invalid': wasValidated && !lastNameValid }"
+          :class="{
+            'is-valid': wasValidated && lastNameValid,
+            'is-invalid': wasValidated && !lastNameValid,
+          }"
         />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">El apellido es obligatorio.</div>
@@ -36,10 +42,15 @@
           v-model="newUser.age"
           type="number"
           placeholder="Edad"
-          :class="{ 'is-valid': wasValidated && ageValid, 'is-invalid': wasValidated && !ageValid }"
+          :class="{
+            'is-valid': wasValidated && ageValid,
+            'is-invalid': wasValidated && !ageValid,
+          }"
         />
         <div class="valid-feedback">Bien.</div>
-        <div class="invalid-feedback">La edad es obligatoria y debe ser 13 años o mayor.</div>
+        <div class="invalid-feedback">
+          La edad es obligatoria y debe ser 13 años o mayor.
+        </div>
       </div>
       <div class="form-group">
         <input
@@ -49,12 +60,16 @@
           v-model="newUser.username"
           type="text"
           placeholder="Usuario"
-          :class="{ 'is-valid': wasValidated && usernameValid, 'is-invalid': wasValidated && !usernameValid }"
+          :class="{
+            'is-valid': wasValidated && usernameValid,
+            'is-invalid': wasValidated && !usernameValid,
+          }"
         />
         <div class="valid-feedback">Bien.</div>
-        <div
-          class="invalid-feedback"
-        >El nombre de usuario es obligatorio y debe contener más de 3 caracteres.</div>
+        <div class="invalid-feedback">
+          El nombre de usuario es obligatorio y debe contener más de 3
+          caracteres.
+        </div>
       </div>
       <div class="form-group">
         <input
@@ -64,12 +79,17 @@
           v-model="newUser.password"
           type="password"
           placeholder="Password"
-          :class="{ 'is-valid': wasValidated && passwordValid, 'is-invalid': wasValidated && !passwordValid }"
+          :class="{
+            'is-valid': wasValidated && passwordValid,
+            'is-invalid': wasValidated && !passwordValid,
+          }"
         />
         <div class="valid-feedback">Bien.</div>
-        <div
-          class="invalid-feedback"
-        >El password es obligatorio y debe contener al menos una letra minuscula, una letra mayuscula, un número y un caracter especial (!, @, #, $, %, ^, & o *).</div>
+        <div class="invalid-feedback">
+          El password es obligatorio y debe contener al menos una letra
+          minuscula, una letra mayuscula, un número y un caracter especial (!,
+          @, #, $, %, ^, & o *).
+        </div>
       </div>
       <div class="form-group">
         <input
@@ -79,7 +99,10 @@
           v-model="repeatPassword"
           type="password"
           placeholder="Repetir Password"
-          :class="{ 'is-valid': wasValidated && repeatPasswordValid, 'is-invalid': wasValidated && !repeatPasswordValid }"
+          :class="{
+            'is-valid': wasValidated && repeatPasswordValid,
+            'is-invalid': wasValidated && !repeatPasswordValid,
+          }"
         />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">Los passwords no coinciden.</div>
@@ -95,21 +118,21 @@
 import swal from "sweetalert2";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       newUser: {
         firstName: "",
         lastName: "",
         age: "",
         username: "",
-        password: ""
+        password: "",
       },
       repeatPassword: "",
-      wasValidated: false
+      wasValidated: false,
     };
   },
   methods: {
-    register: function() {
+    register: function () {
       let vm = this;
 
       if (vm.validate()) {
@@ -119,22 +142,22 @@ export default {
           title: "Registrando!",
           onBeforeOpen: () => {
             swal.showLoading();
-            fetch("http://localhost:8081/api/account/register", {
+            fetch("/api/account/register", {
               method: "POST",
               body: JSON.stringify(vm.newUser),
               headers: {
-                "Content-Type": "application/json"
-              }
+                "Content-Type": "application/json",
+              },
             })
-              .then(res => res.json())
-              .then(json => {
+              .then((res) => res.json())
+              .then((json) => {
                 if (json.ok) {
                   swal
                     .fire({
                       icon: "success",
                       title: `Hecho! Redirigiendo a la página de login`,
                       timer: 2000,
-                      timerProgressBar: true
+                      timerProgressBar: true,
                     })
                     .then(() => {
                       console.log(json.result);
@@ -149,11 +172,11 @@ export default {
                   console.error(json.error);
                 }
               })
-              .catch(err => {
+              .catch((err) => {
                 swal.fire("Error", "Error", "error");
                 console.error(err);
               });
-          }
+          },
         });
       } else {
         swal.fire(
@@ -163,7 +186,7 @@ export default {
         );
       }
     },
-    validate: function() {
+    validate: function () {
       let vm = this;
       let valid = true;
       vm.wasValidated = true;
@@ -176,36 +199,36 @@ export default {
       valid = valid && vm.repeatPasswordValid;
 
       return valid;
-    }
+    },
   },
   computed: {
-    firstNameValid: function() {
+    firstNameValid: function () {
       return this.newUser.firstName != "";
     },
-    lastNameValid: function() {
+    lastNameValid: function () {
       return this.newUser.lastName != "";
     },
-    ageValid: function() {
+    ageValid: function () {
       return this.newUser.age != "" && this.newUser.age > 12;
     },
-    usernameValid: function() {
+    usernameValid: function () {
       return this.newUser.username != "" && this.newUser.username.length > 3;
     },
-    passwordValid: function() {
+    passwordValid: function () {
       return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(
         this.newUser.password
       );
     },
-    repeatPasswordValid: function() {
+    repeatPasswordValid: function () {
       return (
         this.repeatPassword != "" &&
         this.repeatPassword == this.newUser.password
       );
-    }
+    },
   },
-  mounted: function() {
-    document.getElementById('firstName').focus();
-  }
+  mounted: function () {
+    document.getElementById("firstName").focus();
+  },
 };
 </script>
 
