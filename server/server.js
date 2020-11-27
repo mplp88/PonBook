@@ -23,7 +23,7 @@ api.get('/api', (req, res) => {
 
 api.use('/api/account', Account)
 
-// app.listen(port, () => {
+// api.listen(port, () => {
 //   console.log(`Listening on http://localhost:${port}/api`)
 // })
 

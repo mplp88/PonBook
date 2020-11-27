@@ -10,7 +10,7 @@ let dbObject = {
 
 MongoClient.connect(`mongodb+srv://${user}:${password}@cluster0-dcpop.mongodb.net/test?retryWrites=true&w=majority`, (err, client) => {
   if (err) {
-    console.log(err);
+    //console.error(err);
     dbObject.error = err
     dbObject.dbError = true
   } else {

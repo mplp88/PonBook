@@ -49,7 +49,7 @@ export default {
         icon: "info",
         text: "Por favor, espere.",
         title: "Ingresando!",
-        onBeforeOpen: () => {
+        willOpen: () => {
           swal.showLoading();
           fetch("/api/account/login", {
             method: "POST",

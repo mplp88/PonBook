@@ -132,7 +132,7 @@ export default {
           icon: "info",
           text: "Por favor, espere.",
           title: "Modificando!",
-          onBeforeOpen: () => {
+          willOpen: () => {
             swal.showLoading();
             fetch(`/api/account/updateAccountInfo/${vm.user.username}`, {
               method: "POST",

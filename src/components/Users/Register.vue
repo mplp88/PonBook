@@ -140,7 +140,7 @@ export default {
           icon: "info",
           text: "Por favor, espere.",
           title: "Registrando!",
-          onBeforeOpen: () => {
+          willOpen: () => {
             swal.showLoading();
             fetch("/api/account/register", {
               method: "POST",
