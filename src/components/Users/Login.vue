@@ -79,7 +79,7 @@ export default {
               }
             })
             .catch((err) => {
-              swal("Error", "Error", "error");
+              swal.fire("Error", "Error", "error");
               console.error(err);
             });
         },
