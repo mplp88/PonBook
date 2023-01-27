@@ -1,6 +1,6 @@
-const MongoClient = require('mongodb').MongoClient
-const user = process.env.DB_USER
-const password = process.env.DB_PASS
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const user = process.env.DB_USER;
+const password = process.env.DB_PASS;
 
 let dbObject = {
   db: null,
@@ -8,7 +8,11 @@ let dbObject = {
   error: null
 }
 
-MongoClient.connect(`mongodb+srv://${user}:${password}@cluster0-dcpop.mongodb.net/test?retryWrites=true&w=majority`, (err, client) => {
+let uri = `mongodb+srv://${user}:${password}@cluster0.dcpop.mongodb.net/?retryWrites=true&w=majority`;
+
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+client.connect(err => {
   if (err) {
     console.log(err);
     dbObject.error = err

@@ -1,3 +1,4 @@
+require('dotenv').config();
 let express = require('express');
 let serveStatic = require('serve-static');
 let server = require('./server/server');
