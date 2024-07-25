@@ -3,30 +3,18 @@
     <h1>Cambio de contraseña</h1>
     <form @submit.prevent="changePassword">
       <div class="form-group">
-        <input
-          class="form-control"
-          v-model="oldPassword"
-          type="password"
-          placeholder="Password anterior"
-          :class="{
-            'is-valid': wasValidated && oldPasswordValid,
-            'is-invalid': wasValidated && !oldPasswordValid,
-          }"
-        />
+        <input class="form-control" v-model="oldPassword" type="password" placeholder="Password anterior" :class="{
+          'is-valid': wasValidated && oldPasswordValid,
+          'is-invalid': wasValidated && !oldPasswordValid,
+        }" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">El password es obligatorio</div>
       </div>
       <div class="form-group">
-        <input
-          class="form-control"
-          v-model="newPassword"
-          type="password"
-          placeholder="Password nuevo"
-          :class="{
-            'is-valid': wasValidated && newPasswordValid,
-            'is-invalid': wasValidated && !newPasswordValid,
-          }"
-        />
+        <input class="form-control" v-model="newPassword" type="password" placeholder="Password nuevo" :class="{
+          'is-valid': wasValidated && newPasswordValid,
+          'is-invalid': wasValidated && !newPasswordValid,
+        }" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">
           El password es obligatorio, debe contener al menos una letra
@@ -35,34 +23,19 @@
         </div>
       </div>
       <div class="form-group">
-        <input
-          class="form-control"
-          v-model="repeatPassword"
-          type="password"
-          placeholder="Repetir Password"
-          :class="{
-            'is-valid': wasValidated && repeatPasswordValid,
-            'is-invalid': wasValidated && !repeatPasswordValid,
-          }"
-        />
+        <input class="form-control" v-model="repeatPassword" type="password" placeholder="Repetir Password" :class="{
+          'is-valid': wasValidated && repeatPasswordValid,
+          'is-invalid': wasValidated && !repeatPasswordValid,
+        }" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">Los passwords no coinciden.</div>
       </div>
       <div class="row mb-3">
         <div class="col-2 offset-3">
-          <input
-            class="btn btn-primary"
-            type="submit"
-            value="Cambiar Password"
-          />
+          <input class="btn btn-primary" type="submit" value="Cambiar Password" />
         </div>
         <div class="col-2 offset-2">
-          <input
-            class="btn btn-danger"
-            type="buton"
-            value="Cancelar"
-            @click="cancel"
-          />
+          <input class="btn btn-danger" type="buton" value="Cancelar" @click="cancel" />
         </div>
       </div>
     </form>
@@ -102,7 +75,6 @@ export default {
           .then((json) => {
             if (json.ok) {
               vm.$store.dispatch("setUser", json.result);
-              console.log(json.result);
 
               swal
                 .fire({
@@ -166,4 +138,5 @@ export default {
 </script>
 
 <style>
+
 </style>
