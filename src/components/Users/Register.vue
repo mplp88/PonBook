@@ -3,68 +3,39 @@
     <h2>Nuevo usuario</h2>
     <form @submit.prevent="register" novalidate>
       <div class="form-group">
-        <input
-          id="firstName"
-          name="firstName"
-          class="form-control"
-          v-model="newUser.firstName"
-          type="text"
-          placeholder="Nombre"
-          :class="{
+        <input id="firstName" name="firstName" class="form-control" v-model="newUser.firstName" type="text"
+          placeholder="Nombre" :class="{
             'is-valid': wasValidated && firstNameValid,
             'is-invalid': wasValidated && !firstNameValid,
-          }"
-        />
+          }" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">El nombre es obligatorio.</div>
       </div>
       <div class="form-group">
-        <input
-          id="lasName"
-          name="lasName"
-          class="form-control"
-          v-model="newUser.lastName"
-          type="text"
-          placeholder="Apellido"
-          :class="{
+        <input id="lasName" name="lasName" class="form-control" v-model="newUser.lastName" type="text"
+          placeholder="Apellido" :class="{
             'is-valid': wasValidated && lastNameValid,
             'is-invalid': wasValidated && !lastNameValid,
-          }"
-        />
+          }" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">El apellido es obligatorio.</div>
       </div>
       <div class="form-group">
-        <input
-          id="age"
-          name="age"
-          class="form-control"
-          v-model="newUser.age"
-          type="number"
-          placeholder="Edad"
-          :class="{
-            'is-valid': wasValidated && ageValid,
-            'is-invalid': wasValidated && !ageValid,
-          }"
-        />
+        <input id="age" name="age" class="form-control" v-model="newUser.age" type="number" placeholder="Edad" :class="{
+          'is-valid': wasValidated && ageValid,
+          'is-invalid': wasValidated && !ageValid,
+        }" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">
           La edad es obligatoria y debe ser 13 años o mayor.
         </div>
       </div>
       <div class="form-group">
-        <input
-          id="username"
-          name="username"
-          class="form-control"
-          v-model="newUser.username"
-          type="text"
-          placeholder="Usuario"
-          :class="{
+        <input id="username" name="username" class="form-control" v-model="newUser.username" type="text"
+          placeholder="Usuario" :class="{
             'is-valid': wasValidated && usernameValid,
             'is-invalid': wasValidated && !usernameValid,
-          }"
-        />
+          }" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">
           El nombre de usuario es obligatorio y debe contener más de 3
@@ -72,18 +43,11 @@
         </div>
       </div>
       <div class="form-group">
-        <input
-          id="password"
-          name="password"
-          class="form-control"
-          v-model="newUser.password"
-          type="password"
-          placeholder="Password"
-          :class="{
+        <input id="password" name="password" class="form-control" v-model="newUser.password" type="password"
+          placeholder="Password" :class="{
             'is-valid': wasValidated && passwordValid,
             'is-invalid': wasValidated && !passwordValid,
-          }"
-        />
+          }" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">
           El password es obligatorio y debe contener al menos una letra
@@ -92,18 +56,11 @@
         </div>
       </div>
       <div class="form-group">
-        <input
-          id="repeatPassword"
-          name="repeatPassword"
-          class="form-control"
-          v-model="repeatPassword"
-          type="password"
-          placeholder="Repetir Password"
-          :class="{
+        <input id="repeatPassword" name="repeatPassword" class="form-control" v-model="repeatPassword" type="password"
+          placeholder="Repetir Password" :class="{
             'is-valid': wasValidated && repeatPasswordValid,
             'is-invalid': wasValidated && !repeatPasswordValid,
-          }"
-        />
+          }" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">Los passwords no coinciden.</div>
       </div>
@@ -160,7 +117,6 @@ export default {
                       timerProgressBar: true,
                     })
                     .then(() => {
-                      console.log(json.result);
                       vm.$router.push("/login");
                     });
                 } else {
@@ -233,4 +189,5 @@ export default {
 </script>
 
 <style>
+
 </style>
