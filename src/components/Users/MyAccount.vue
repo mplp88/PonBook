@@ -14,78 +14,45 @@
       <div class="row mb-3">
         <label class="col" for="firstName">Nombre:</label>
         <span class="col" v-if="!editMode">{{ user.firstName }}</span>
-        <input
-          v-else
-          class="form-control col d-inline"
-          :class="{
-            'is-valid': wasValidated && firstNameValid,
-            'is-invalid': wasValidated && !firstNameValid,
-          }"
-          v-model="editUser.firstName"
-          type="text"
-          placeholder="Nombre"
-        />
+        <input v-else class="form-control col d-inline" :class="{
+          'is-valid': wasValidated && firstNameValid,
+          'is-invalid': wasValidated && !firstNameValid,
+        }" v-model="editUser.firstName" type="text" placeholder="Nombre" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">El nombre es obligatorio.</div>
       </div>
       <div class="row mb-3">
         <label class="col" for="lastName">Apellido:</label>
         <span class="col" v-if="!editMode">{{ user.lastName }}</span>
-        <input
-          v-else
-          class="form-control col d-inline"
-          :class="{
-            'is-valid': wasValidated && lastNameValid,
-            'is-invalid': wasValidated && !lastNameValid,
-          }"
-          v-model="editUser.lastName"
-          type="text"
-          placeholder="Apellido"
-        />
+        <input v-else class="form-control col d-inline" :class="{
+          'is-valid': wasValidated && lastNameValid,
+          'is-invalid': wasValidated && !lastNameValid,
+        }" v-model="editUser.lastName" type="text" placeholder="Apellido" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">El apellido es obligatorio.</div>
       </div>
       <div class="row mb-3">
         <label class="col" for="age">Edad:</label>
         <span class="col" v-if="!editMode">{{ user.age }}</span>
-        <input
-          v-else
-          class="form-control col d-inline"
-          :class="{
-            'is-valid': wasValidated && ageValid,
-            'is-invalid': wasValidated && !ageValid,
-          }"
-          v-model="editUser.age"
-          type="number"
-          placeholder="Edad"
-        />
+        <input v-else class="form-control col d-inline" :class="{
+          'is-valid': wasValidated && ageValid,
+          'is-invalid': wasValidated && !ageValid,
+        }" v-model="editUser.age" type="number" placeholder="Edad" />
         <div class="valid-feedback">Bien.</div>
         <div class="invalid-feedback">
           La edad es obligatoria y debe ser 13 años o mayor.
         </div>
       </div>
       <div class="row mb-3">
-        <input
-          v-if="editMode"
-          class="btn btn-primary offset-3 col-2"
-          type="submit"
-          value="Enviar"
-        />
-        <input
-          v-if="editMode"
-          class="btn btn-danger offset-2 col-2"
-          @click.prevent="toggleEditMode"
-          type="button"
-          value="Cancelar"
-        />
+        <input v-if="editMode" class="btn btn-primary offset-3 col-2" type="submit" value="Enviar" />
+        <input v-if="editMode" class="btn btn-danger offset-2 col-2" @click.prevent="toggleEditMode" type="button"
+          value="Cancelar" />
       </div>
     </form>
     <hr />
     <div class="row mb-3">
       <div class="col-2">
-        <router-link to="/changePassword" v-if="!editMode"
-          >Cambiar password</router-link
-        >
+        <router-link to="/changePassword" v-if="!editMode">Cambiar password</router-link>
       </div>
     </div>
   </div>
@@ -152,7 +119,6 @@ export default {
                       timerProgressBar: true,
                     })
                     .then(() => {
-                      console.log(json.result);
                       vm.$store.dispatch("setUser", json.result);
                       vm.toggleEditMode();
                     });
@@ -203,4 +169,5 @@ export default {
 </script>
 
 <style>
+
 </style>  
